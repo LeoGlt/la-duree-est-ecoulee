@@ -5,6 +5,9 @@ import ReadyForRound1View from '@/views/ReadyForRound1View.vue'
 import Round1View from '@/views/Round1View.vue'
 import Round1RecapView from '@/views/Round1RecapView.vue'
 import Round2View from '@/views/Round2View.vue'
+import Round2RecapView from '@/views/Round2RecapView.vue'
+import Round3View from '@/views/Round3View.vue'
+import Round3RecapView from '@/views/Round3RecapView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +41,21 @@ const router = createRouter({
       path: '/manche-2',
       name: 'manche-2',
       component: Round2View
+    },
+    {
+      path: '/recap-manche-2',
+      name: 'recap-manche-2',
+      component: Round2RecapView
+    },
+    {
+      path: '/manche-3',
+      name: 'manche-3',
+      component: Round3View
+    },
+    {
+      path: '/recap-manche-3',
+      name: 'recap-manche-3',
+      component: Round3RecapView
     },
   ]
 })
