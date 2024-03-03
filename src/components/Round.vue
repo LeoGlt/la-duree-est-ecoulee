@@ -34,7 +34,7 @@ const cardsFound = {
     1: [],
     2: [],
 };
-const initialTime = 30;
+const initialTime = 1000;
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 
@@ -50,7 +50,7 @@ const nextCard = (found) => {
     console.log({ cardsFound, cards })
 
     if (cards.length === 0) {
-        localStorage.setItem("cardsFound", JSON.stringify(cardsFound))
+        localStorage.setItem("cardsFound" + props.roundNumber, JSON.stringify(cardsFound))
         router.push("/recap-manche-" + props.roundNumber)
     }
 
@@ -83,7 +83,9 @@ setInterval(() => {
         <h2>{{ remainingTime }} </h2>
         <h2>{{ currentCard }}</h2>
         <button class="next-card action success" @click="nextCard(true)">✔</button>
-        <button class="next-card action failure" @click="nextCard(false)">×</button>
+        <div v-if= "props.roundNumber > 1">
+            <button class="next-card action failure" @click="nextCard(false)">×</button>
+        </div>
         <div class="scores">
             <div class="score">
                 <p>{{ cardsFound[1].length }}</p>

@@ -1,5 +1,10 @@
 <script setup>
 import { RouterLink } from "vue-router"
+
+localStorage.clear("cardsFound1");
+localStorage.clear("cardsFound2");
+localStorage.clear("cardsFound3");
+
 </script>
 
 <template>
