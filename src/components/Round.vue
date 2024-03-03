@@ -34,7 +34,7 @@ const cardsFound = {
     1: [],
     2: [],
 };
-const initialTime = 300;
+const initialTime = 30;
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 
