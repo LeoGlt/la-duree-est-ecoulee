@@ -28,13 +28,13 @@ const shuffle = (array) => {
     return array;
 }
 
-const cards = shuffle(characters).splice(0, 5)
+const cards = shuffle(characters).splice(0, 40)
 
 const cardsFound = {
     1: [],
     2: [],
 };
-const initialTime = 1000;
+const initialTime = 30;
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 
@@ -85,16 +85,6 @@ setInterval(() => {
         <button class="next-card action success" @click="nextCard(true)">✔</button>
         <div v-if= "props.roundNumber > 1">
             <button class="next-card action failure" @click="nextCard(false)">×</button>
-        </div>
-        <div class="scores">
-            <div class="score">
-                <p>{{ cardsFound[1].length }}</p>
-                <div :style="{ 'height': (10 * cardsFound[1].length) + 'px', 'background-color': 'blue' }"></div>
-            </div>
-            <div class="score">
-                <p>{{ cardsFound[2].length }}</p>
-                <div :style="{ 'height': (10 * cardsFound[2].length) + 'px', 'background-color': 'pink' }"></div>
-            </div>
         </div>
         <div class="scores">
             <p class="score-1" :style="{ 'width': (20 + 10 * cardsFound[1].length) + 'px' }">
