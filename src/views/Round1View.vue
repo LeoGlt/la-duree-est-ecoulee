@@ -1,34 +1,34 @@
 <script setup>
-import {useRouter} from 'vue-router'
-import {ref} from 'vue'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import characters from '@/assets/cards.json'
 const router = useRouter()
 
-const shuffle = (array)=> {
-  let currentIndex = array.length,  randomIndex;
+const shuffle = (array) => {
+    let currentIndex = array.length, randomIndex;
 
-  // While there remain elements to shuffle.
-  while (currentIndex > 0) {
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
 
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
 
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
 
-  return array;
+    return array;
 }
 
-const cards = shuffle(characters).splice(0,40)
+const cards = shuffle(characters).splice(0, 40)
 
 const cardsFound = {
     1: [],
     2: [],
 };
-const initialTime = 30;
+const initialTime = 3000;
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 
@@ -38,12 +38,12 @@ let remainingTime = ref(initialTime);
 const nextCard = (found) => {
     if (found) {
         cardsFound[currentTeam.value].push(cards.shift())
-    }else{
+    } else {
         cards.push(cards.shift(cardsFound))
     }
-    console.log({cardsFound, cards})
+    console.log({ cardsFound, cards })
 
-    if (cards.length === 0){
+    if (cards.length === 0) {
         localStorage.setItem("cardsFound", JSON.stringify(cardsFound))
         router.push("/recap-manche-1")
     }
@@ -57,12 +57,12 @@ const continueGame = () => {
 }
 
 setInterval(() => {
-    if (clockIsRunning.value){
-        if (remainingTime.value > 0){
-        remainingTime.value -= 1;
-        }else{
+    if (clockIsRunning.value) {
+        if (remainingTime.value > 0) {
+            remainingTime.value -= 1;
+        } else {
             clockIsRunning.value = false;
-            currentTeam.value = currentTeam.value==1?2:1
+            currentTeam.value = currentTeam.value == 1 ? 2 : 1
         }
     }
 
@@ -72,19 +72,19 @@ setInterval(() => {
 
 <template>
     <div v-if="clockIsRunning">
-        <p>Equipe {{   currentTeam }}</p>
+        <p>Equipe {{ currentTeam }}</p>
         <h2>{{ remainingTime }} </h2>
         <h2>{{ currentCard }}</h2>
-        <button class="next-card" @click="nextCard(true)" >✅</button>
-        <button class="next-card" @click="nextCard(false)" >❌</button>
+        <button class="next-card action success" @click="nextCard(true)">✔</button>
+        <button class="next-card action failure" @click="nextCard(false)">×</button>
         <div class="scores">
             <div class="score">
                 <p>{{ cardsFound[1].length }}</p>
-                <div :style="{'height': (10*cardsFound[1].length)+'px', 'background-color': 'blue'}"></div>
+                <div :style="{ 'height': (10 * cardsFound[1].length) + 'px', 'background-color': 'blue' }"></div>
             </div>
             <div class="score">
                 <p>{{ cardsFound[2].length }}</p>
-                <div :style="{'height': (10*cardsFound[2].length)+'px', 'background-color': 'pink'}"></div>
+                <div :style="{ 'height': (10 * cardsFound[2].length) + 'px', 'background-color': 'pink' }"></div>
             </div>
         </div>
     </div>
@@ -96,19 +96,44 @@ setInterval(() => {
 </template>
 
 <style scoped>
-.next-card{
+.next-card {
     font-size: 3rem;
     width: 100px;
     height: 100px;
 }
-.scores{
+
+.scores {
     display: flex;
     align-items: flex-end;
 }
-.score{
+
+.score {
     min-width: 50px;
 }
-.score > div{
+
+.score>div {
     width: 100%;
+}
+
+.success,
+.failure {
+    color: white;
+}
+
+.success {
+    background-color: #00916e;
+}
+
+.failure {
+    background-color: #fa003f;
+}
+
+button.action {
+    border: none;
+    border-radius: 298px;
+    font-size: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
