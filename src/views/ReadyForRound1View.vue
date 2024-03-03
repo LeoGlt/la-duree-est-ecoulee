@@ -1,9 +1,11 @@
 <script setup>
+import { initDeck } from '@/components/deck';
 import { RouterLink } from 'vue-router'
 
 localStorage.clear('cardsFound1')
 localStorage.clear('cardsFound2')
 localStorage.clear('cardsFound3')
+initDeck(40)
 </script>
 
 <template>
