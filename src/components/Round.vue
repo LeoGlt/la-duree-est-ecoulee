@@ -77,7 +77,7 @@ setInterval(() => {
 </script>
 
 <template>
-    <div v-if="clockIsRunning">
+    <template v-if="clockIsRunning">
         <h1>Ceci est la manche {{ props.roundNumber }}</h1>
         <p>Equipe {{ currentTeam }}</p>
         <h2>{{ remainingTime }} </h2>
@@ -96,11 +96,20 @@ setInterval(() => {
                 <div :style="{ 'height': (10 * cardsFound[2].length) + 'px', 'background-color': 'pink' }"></div>
             </div>
         </div>
-    </div>
-    <div v-else>
+        <div class="scores">
+            <p class="score-1" :style="{ 'width': (20 + 10 * cardsFound[1].length) + 'px' }">
+                {{ cardsFound[1].length }}
+            </p>
+            <p class="score-2" :style="{ 'width': (20 + 10 * cardsFound[2].length) + 'px' }">
+                {{ cardsFound[2].length }}
+            </p>
+        </div>
+    </template>
+
+    <template v-else>
         <p>C'est au tour de l'équipe {{ currentTeam }}</p>
         <button @click="continueGame()">C'est parti !</button>
-    </div>
+    </template>
 
 </template>
 
@@ -113,11 +122,24 @@ setInterval(() => {
 
 .scores {
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
 }
 
-.score {
-    min-width: 50px;
+.scores p {
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.score-1 {
+    margin: 0;
+    background-color: #FFCF00;
+}
+
+.score-2 {
+    background-color: #00916e;
 }
 
 .score>div {
@@ -139,10 +161,39 @@ setInterval(() => {
 
 button.action {
     border: none;
+    width: 130px;
+    height: 130px;
     border-radius: 298px;
     font-size: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 11px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.card {
+    background-color: #FFCF00;
+    color: #664a05;
+    min-height: 100px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.clock {
+    font-size: 3rem;
+    font-size: 3rem;
+    font-family: monospace;
+    line-height: 0;
+    color: #ee6123;
+}
+
+.next-card-container {
+    display: flex
 }
 </style>
