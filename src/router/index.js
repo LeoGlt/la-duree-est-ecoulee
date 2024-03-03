@@ -56,7 +56,7 @@ const router = createRouter({
       path: '/recap-manche-3',
       name: 'recap-manche-3',
       component: Round3RecapView
-    },
+    }
   ]
 })
 
