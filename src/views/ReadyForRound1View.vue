@@ -1,5 +1,5 @@
 <script setup>
-import { initDeck } from '@/components/deck';
+import { initDeck } from '@/components/deck'
 import { RouterLink } from 'vue-router'
 
 localStorage.clear('cardsFound1')
