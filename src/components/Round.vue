@@ -8,8 +8,10 @@ const props = defineProps({
   roundNumber: { type: Number, required: true }
 })
 
+/** Remaining cards to guess*/
 let cards = getDeck()
 
+/** For each team, the list of cards they found */
 const cardsFound = {
   1: [],
   2: []
