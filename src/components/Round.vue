@@ -1,15 +1,17 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { getDeck } from './deck'
+import { getDeck, shuffle } from './deck'
 const router = useRouter()
 
 const props = defineProps({
   roundNumber: { type: Number, required: true }
 })
 
-const cards = getDeck()
+/** Remaining cards to guess*/
+let cards = getDeck()
 
+/** For each team, the list of cards they found */
 const cardsFound = {
   1: [],
   2: []
@@ -25,7 +27,7 @@ const nextCard = (found) => {
   if (found) {
     cardsFound[currentTeam.value].push(cards.shift())
   } else {
-    cards.push(cards.shift(cardsFound))
+    cards.push(cards.shift())
   }
   console.log({ cardsFound, cards })
 
@@ -40,6 +42,8 @@ const nextCard = (found) => {
 const continueGame = () => {
   remainingTime.value = initialTime
   clockIsRunning.value = true
+  cards = shuffle(cards)
+  nextCard(false)
 }
 
 setInterval(() => {
