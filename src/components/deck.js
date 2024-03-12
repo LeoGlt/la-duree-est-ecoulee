@@ -10,7 +10,7 @@ export const initDeck = (numberCards) => {
 }
 
 
-const shuffle = (array) => {
+export const shuffle = (array) => {
     let currentIndex = array.length,
         randomIndex
 
