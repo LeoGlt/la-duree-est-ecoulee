@@ -20,8 +20,14 @@ const initialTime = 30
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 
-let currentTeam = ref(1)
+let currentTeam = ref(+localStorage.getItem('nextTeamToPlay'))
 let remainingTime = ref(initialTime)
+
+/**
+ * Returns the number of the next team
+ * @returns {number} Number of the next team
+ */
+const getNextTeam = () => (currentTeam.value == 1 ? 2 : 1)
 
 const nextCard = (found) => {
   if (found) {
@@ -33,6 +39,7 @@ const nextCard = (found) => {
 
   if (cards.length === 0) {
     localStorage.setItem('cardsFound' + props.roundNumber, JSON.stringify(cardsFound))
+    localStorage.setItem('nextTeamToPlay', getNextTeam())
     router.push('/recap-manche-' + props.roundNumber)
   }
 
@@ -52,7 +59,7 @@ setInterval(() => {
       remainingTime.value -= 1
     } else {
       clockIsRunning.value = false
-      currentTeam.value = currentTeam.value == 1 ? 2 : 1
+      currentTeam.value = getNextTeam()
     }
   }
 }, 1000)
