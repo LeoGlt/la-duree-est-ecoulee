@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { getDeck, shuffle } from './deck'
+
 const router = useRouter()
 
 const props = defineProps({
@@ -16,7 +17,7 @@ const cardsFound = {
   1: [],
   2: []
 }
-const initialTime = 30
+const initialTime = import.meta.env.VITE_INITIAL_TIME
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
 const nextCardIsDisabled = ref(false)
