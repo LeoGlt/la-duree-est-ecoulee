@@ -19,6 +19,7 @@ const cardsFound = {
 const initialTime = 30
 const clockIsRunning = ref(true)
 const currentCard = ref(cards[0])
+const nextCardIsDisabled = ref(false)
 
 let currentTeam = ref(+localStorage.getItem('nextTeamToPlay'))
 let remainingTime = ref(initialTime)
@@ -44,6 +45,9 @@ const nextCard = (found) => {
   }
 
   currentCard.value = cards[0]
+  nextCardIsDisabled.value = true
+
+  setTimeout(() => (nextCardIsDisabled.value = false), 800)
 }
 
 const continueGame = () => {
@@ -72,9 +76,21 @@ setInterval(() => {
     <h2 class="clock">{{ remainingTime }}</h2>
     <h2 class="card">{{ currentCard }}</h2>
     <div class="next-card-container">
-      <button class="next-card action success" @click="nextCard(true)">✔</button>
+      <button
+        class="next-card action success"
+        :disabled="nextCardIsDisabled"
+        @click="nextCard(true)"
+      >
+        ✔
+      </button>
       <div v-if="props.roundNumber > 1">
-        <button class="next-card action failure" @click="nextCard(false)">×</button>
+        <button
+          class="next-card action failure"
+          :disabled="nextCardIsDisabled"
+          @click="nextCard(false)"
+        >
+          ×
+        </button>
       </div>
     </div>
     <div class="scores">
@@ -152,6 +168,10 @@ button.action {
   box-shadow:
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+button.action:disabled {
+  opacity: 0.5;
 }
 
 .card {
