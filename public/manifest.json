@@ -9,7 +9,7 @@
     "start_url": "/",
     "icons": [
         {
-            "src": "favicon.ico",
+            "src": "marcel.png",
             "sizes": "1024x1024"
         }
     ]
