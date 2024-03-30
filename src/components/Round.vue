@@ -140,7 +140,8 @@ button.action:disabled {
   background-color: #ffcf00;
   color: #664a05;
   min-height: 100px;
-  width: 400px;
+  min-width: 80%;
+  max-width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
