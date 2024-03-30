@@ -1,5 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import RoundClock from './RoundClock.vue'
+import RoundScores from './RoundScores.vue'
+
 import { ref } from 'vue'
 import { getDeck, shuffle } from './deck'
 
@@ -17,13 +20,11 @@ const cardsFound = {
   1: [],
   2: []
 }
-const initialTime = import.meta.env.VITE_INITIAL_TIME
-const clockIsRunning = ref(true)
+const timeIsRunning = ref(true)
 const currentCard = ref(cards[0])
 const nextCardIsDisabled = ref(false)
 
 let currentTeam = ref(+localStorage.getItem('nextTeamToPlay'))
-let remainingTime = ref(initialTime)
 
 /**
  * Returns the number of the next team
@@ -52,29 +53,22 @@ const nextCard = (found) => {
 }
 
 const continueGame = () => {
-  remainingTime.value = initialTime
-  clockIsRunning.value = true
+  timeIsRunning.value = true
   cards = shuffle(cards)
   nextCard(false)
 }
 
-setInterval(() => {
-  if (clockIsRunning.value) {
-    if (remainingTime.value > 0) {
-      remainingTime.value -= 1
-    } else {
-      clockIsRunning.value = false
-      currentTeam.value = getNextTeam()
-    }
-  }
-}, 1000)
+const timeIsUp = () => {
+  timeIsRunning.value = false
+  currentTeam.value = getNextTeam()
+}
 </script>
 
 <template>
-  <template v-if="clockIsRunning">
+  <template v-if="timeIsRunning">
     <h1>Ceci est la manche {{ props.roundNumber }}</h1>
     <p>Equipe {{ currentTeam }}</p>
-    <h2 class="clock">{{ remainingTime }}</h2>
+    <round-clock @on-time-is-up="timeIsUp" />
     <h2 class="card">{{ currentCard }}</h2>
     <div class="next-card-container">
       <button
@@ -94,14 +88,7 @@ setInterval(() => {
         </button>
       </div>
     </div>
-    <div class="scores">
-      <p class="score-1" :style="{ width: 20 + 10 * cardsFound[1].length + 'px' }">
-        {{ cardsFound[1].length }}
-      </p>
-      <p class="score-2" :style="{ width: 20 + 10 * cardsFound[2].length + 'px' }">
-        {{ cardsFound[2].length }}
-      </p>
-    </div>
+    <round-scores :score1="cardsFound[1].length" :score2="cardsFound[2].length" />
   </template>
 
   <template v-else>
@@ -115,32 +102,6 @@ setInterval(() => {
   font-size: 3rem;
   width: 100px;
   height: 100px;
-}
-
-.scores {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.scores p {
-  text-align: center;
-  color: white;
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.score-1 {
-  margin: 0;
-  background-color: #ffcf00;
-}
-
-.score-2 {
-  background-color: #00916e;
-}
-
-.score > div {
-  width: 100%;
 }
 
 .success,

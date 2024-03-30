@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 localStorage.clear('cardsFound1')
 localStorage.clear('cardsFound2')
 localStorage.clear('cardsFound3')
-initDeck(40) // TODO: move in an environment variable
+initDeck(import.meta.env.VITE_DECK_SIZE)
 localStorage.setItem('nextTeamToPlay', 1)
 </script>
 
