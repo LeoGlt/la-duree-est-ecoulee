@@ -1,0 +1,16 @@
+{
+    "name": "La durée est écoulée",
+    "short_name": "La durée est écoulée",
+    "theme_color": "#2196f3",
+    "background_color": "#2196f3",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "marcel.png",
+            "sizes": "1024x1024"
+        }
+    ]
+  }
