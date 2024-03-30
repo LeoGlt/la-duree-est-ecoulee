@@ -9,7 +9,7 @@
     "start_url": "/",
     "icons": [
         {
-            "src": "marcel.png",
+            "src": "https://la-duree-est-ecoulee-2.web.app/marcel.png",
             "sizes": "1024x1024"
         }
     ]
