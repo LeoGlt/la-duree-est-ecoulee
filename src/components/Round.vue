@@ -38,7 +38,6 @@ const nextCard = (found) => {
   } else {
     cards.push(cards.shift())
   }
-  console.log({ cardsFound, cards })
 
   if (cards.length === 0) {
     localStorage.setItem('cardsFound' + props.roundNumber, JSON.stringify(cardsFound))
