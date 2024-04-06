@@ -3,5 +3,5 @@ import ReadyForRound from '../components/ReadyForRound.vue'
 </script>
 
 <template>
-  <ReadyForRound :round-number="1"></ReadyForRound>
+  <ReadyForRound :round-number="2"></ReadyForRound>
 </template>
