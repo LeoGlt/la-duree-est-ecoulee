@@ -2,7 +2,8 @@ const storageHandler = {
     /**
      * Retrieve an json from local storage and parses it
      * @param {object} obj not used
-     * @param {string} prop name of property on object 
+     * @param {string} prop name of property on object
+     * @returns the value of the object from local storage 
      */
     get(obj, prop){
         const json = localStorage.getItem(prop)
@@ -17,7 +18,7 @@ const storageHandler = {
      * @param {object} obj not used
      * @param {string} prop name of property to set
      * @param {object} value value of property
-     * @returns 
+     * @returns true to tell the assignment was done right
      */
     set(obj, prop, value){
         localStorage.setItem(prop, JSON.stringify(value))
