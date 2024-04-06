@@ -51,7 +51,7 @@ const getWinnerStr = () => {
   </table>
 
   <div v-if="props.roundNumber < 3">
-    <RouterLink class="action" :to="'/manche-' + nextRoundNumber"
+    <RouterLink class="action" :to="'/cest-parti-pour-la-manche-' + nextRoundNumber"
       >Manche {{ nextRoundNumber }}</RouterLink
     >
   </div>

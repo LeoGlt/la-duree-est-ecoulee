@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import ReadyForRound1View from '@/views/ReadyForRound1View.vue'
 import Round1View from '@/views/Round1View.vue'
 import Round1RecapView from '@/views/Round1RecapView.vue'
+import ReadyForRound2View from '@/views/ReadyForRound2View.vue'
 import Round2View from '@/views/Round2View.vue'
+import ReadyForRound3View from '@/views/ReadyForRound3View.vue'
 import Round2RecapView from '@/views/Round2RecapView.vue'
 import Round3View from '@/views/Round3View.vue'
 import Round3RecapView from '@/views/Round3RecapView.vue'
@@ -33,6 +35,11 @@ const router = createRouter({
       component: Round1RecapView
     },
     {
+      path: '/cest-parti-pour-la-manche-2',
+      name: 'cest-parti-pour-la-manche-2',
+      component: ReadyForRound2View
+    },
+    {
       path: '/manche-2',
       name: 'manche-2',
       component: Round2View
@@ -41,6 +48,11 @@ const router = createRouter({
       path: '/recap-manche-2',
       name: 'recap-manche-2',
       component: Round2RecapView
+    },
+    {
+      path: '/cest-parti-pour-la-manche-3',
+      name: 'cest-parti-pour-la-manche-3',
+      component: ReadyForRound3View
     },
     {
       path: '/manche-3',

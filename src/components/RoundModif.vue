@@ -1,7 +1,7 @@
 <script setup>
 import { getNbCardsFound } from '@/components/cardsGuessed'
 
-const props = defineProps({
+defineProps({
   cardsGuessed: { type: Array, required: true },
   currentTeam: { type: Number, required: true }
 })
