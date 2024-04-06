@@ -16,7 +16,7 @@ const props = defineProps({
 /** Remaining cards to guess*/
 let cards = getDeck()
 
-/** For each team, the list of cards they found */
+/** For each team, the number of cards they found */
 const nbCardsFound = {
   1: 0,
   2: 0
