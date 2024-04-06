@@ -1,4 +1,5 @@
 <script setup>
+import storageInterface from '@/storage-interface';
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
@@ -8,7 +9,7 @@ const props = defineProps({
 const nextRoundNumber = computed(() => +props.roundNumber + 1)
 
 const getNumberCardsFound = (roundNumber, teamNumber) => {
-  let cardsFound = JSON.parse(localStorage.getItem('cardsFound' + roundNumber))
+  let cardsFound = storageInterface['cardsFound' + roundNumber]
   return cardsFound[teamNumber].length
 }
 
@@ -16,7 +17,7 @@ const getWinnerStr = () => {
   let nbFound1 = 0
   let nbFound2 = 0
   for (let i = 1; i <= 3; i++) {
-    let cardsFound = JSON.parse(localStorage.getItem('cardsFound' + i))
+    let cardsFound = storageInterface['cardsFound' + i]
     nbFound1 += cardsFound[1].length
     nbFound2 += cardsFound[2].length
   }

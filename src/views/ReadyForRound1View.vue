@@ -1,12 +1,13 @@
 <script setup>
 import { initDeck } from '@/components/deck'
+import storageInterface from '@/storage-interface';
 import { RouterLink } from 'vue-router'
 
-localStorage.clear('cardsFound1')
-localStorage.clear('cardsFound2')
-localStorage.clear('cardsFound3')
+storageInterface.cardsFound1 = undefined
+storageInterface.cardsFound2 = undefined
+storageInterface.cardsFound3 = undefined
 initDeck(import.meta.env.VITE_DECK_SIZE)
-localStorage.setItem('nextTeamToPlay', 1)
+localStorage.nextTeamToPlay = 1
 </script>
 
 <template>

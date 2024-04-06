@@ -5,6 +5,7 @@ import RoundScores from './RoundScores.vue'
 
 import { ref } from 'vue'
 import { getDeck, shuffle } from './deck'
+import storageInterface from '@/storage-interface'
 
 const router = useRouter()
 
@@ -24,7 +25,7 @@ const timeIsRunning = ref(true)
 const currentCard = ref(cards[0])
 const nextCardIsDisabled = ref(false)
 
-let currentTeam = ref(+localStorage.getItem('nextTeamToPlay'))
+let currentTeam = ref(storageInterface.nextTeamToPlay)
 
 /**
  * Returns the number of the next team

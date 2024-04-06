@@ -1,11 +1,11 @@
 import characters from '@/assets/cards.json'
-
+import storageInterface from '@/storage-interface'
 /**
  * Get deck from local storage and shuffle it
  * @returns {string[]} Shuffled deck
  */
 export const getDeck = () => {
-  return shuffle(JSON.parse(localStorage.getItem('deck')))
+  return shuffle(storageInterface.deck)
 }
 
 /**
@@ -13,8 +13,7 @@ export const getDeck = () => {
  * @param {number} numberCards Number of cards to put in the deck
  */
 export const initDeck = (numberCards) => {
-  const cards = shuffle(characters).splice(0, numberCards)
-  localStorage.setItem('deck', JSON.stringify(cards))
+  storageInterface.deck = shuffle(characters).splice(0, numberCards)
 }
 
 /**
