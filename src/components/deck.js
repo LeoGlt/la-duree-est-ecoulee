@@ -22,10 +22,10 @@ export const initDeck = (numberCards) => {
  * @returns {Array<T>} Shuffled array
  */
 export const shuffle = (array) => {
-    let copy = [...array]
+  let copy = [...array]
 
-    let currentIndex = copy.length,
-        randomIndex
+  let currentIndex = copy.length,
+    randomIndex
 
   // While there remain elements to shuffle.
   while (currentIndex > 0) {

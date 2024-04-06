@@ -1,6 +1,6 @@
 <script setup>
 import { initDeck } from '@/components/deck'
-import storageInterface from '@/storage-interface';
+import storageInterface from '@/storage-interface'
 import { RouterLink } from 'vue-router'
 
 storageInterface.cardsFound1 = undefined

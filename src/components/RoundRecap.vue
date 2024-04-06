@@ -1,5 +1,5 @@
 <script setup>
-import storageInterface from '@/storage-interface';
+import storageInterface from '@/storage-interface'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 
