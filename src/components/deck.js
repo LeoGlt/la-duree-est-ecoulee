@@ -5,7 +5,7 @@ import storageInterface from '@/storage-interface'
  * @returns {string[]} Shuffled deck
  */
 export const getDeck = () => {
-  return shuffle(storageInterface.deck );
+  return shuffle(storageInterface.deck)
 }
 
 /**
