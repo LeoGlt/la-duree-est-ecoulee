@@ -4,11 +4,11 @@
  * @returns {Number} Number of cards found
  */
 export const getNbCardsFound = (cardsGuessed) => {
-    let nbFound = 0
-    for (const card of cardsGuessed) {
-      if (card.found) {
-        nbFound += 1
-      }
+  let nbFound = 0
+  for (const card of cardsGuessed) {
+    if (card.found) {
+      nbFound += 1
     }
-    return nbFound
   }
+  return nbFound
+}
