@@ -15,7 +15,11 @@ const props = defineProps({
 /** Remaining cards to guess*/
 let cards = getDeck()
 
-/** For each team, the list of cards they found */
+/** */
+let cardsFound = []
+let cardsNotFound = []
+
+/** For each team, the number of cards they found */
 const nbCardsFound = {
   1: 0,
   2: 0
@@ -35,9 +39,11 @@ const getNextTeam = () => (currentTeam.value == 1 ? 2 : 1)
 const nextCard = (found) => {
   if (found) {
     nbCardsFound[currentTeam.value] += 1
-    cards.shift()
+    cardsFound.push(cards.shift())
   } else {
-    cards.push(cards.shift())
+    const notFound = cards.shift()
+    cardsNotFound.push(notFound)
+    cards.push(notFound)
   }
 
   if (cards.length === 0) {
