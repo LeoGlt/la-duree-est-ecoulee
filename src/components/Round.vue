@@ -7,9 +7,7 @@ import { ref } from 'vue'
 import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
 
-const router = useRouter(
-  
-)
+const router = useRouter()
 
 const props = defineProps({
   roundNumber: { type: Number, required: true }
