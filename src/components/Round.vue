@@ -2,8 +2,10 @@
 import { useRouter } from 'vue-router'
 import RoundClock from './RoundClock.vue'
 import RoundScores from './RoundScores.vue'
+import RoundModif from './RoundModif.vue'
 
-import { ref } from 'vue'
+import { getNbCardsFound } from '@/components/cardsGuessed'
+import { reactive, ref } from 'vue'
 import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
 
@@ -15,6 +17,9 @@ const props = defineProps({
 
 /** Remaining cards to guess*/
 let cards = getDeck()
+
+/** Will contain cards found and not found by a team*/
+let cardsGuessed = reactive([])
 
 /** For each team, the number of cards they found */
 const nbCardsFound = {
@@ -34,17 +39,10 @@ let currentTeam = ref(storageInterface.nextTeamToPlay)
 const getNextTeam = () => (currentTeam.value == 1 ? 2 : 1)
 
 const nextCard = (found) => {
-  if (found) {
-    nbCardsFound[currentTeam.value] += 1
-    cards.shift()
-  } else {
-    cards.push(cards.shift())
-  }
+  cardsGuessed.push({ name: cards.shift(), found: found })
 
   if (cards.length === 0) {
-    localStorage.setItem('nbCardsFound' + props.roundNumber, JSON.stringify(nbCardsFound))
-    localStorage.setItem('nextTeamToPlay', getNextTeam())
-    router.push('/recap-manche-' + props.roundNumber)
+    timeIsRunning.value = false
   }
 
   currentCard.value = cards[0]
@@ -53,15 +51,40 @@ const nextCard = (found) => {
   setTimeout(() => (nextCardIsDisabled.value = false), 800)
 }
 
+const updateCardStatus = (data) => {
+  const index = data.message
+  cardsGuessed[index].found = !cardsGuessed[index].found
+}
+
 const continueGame = () => {
-  timeIsRunning.value = true
+  /** Count cards found and put cards not found back in the cards*/
+  let nbFound = 0
+  for (const card of cardsGuessed) {
+    if (!card.found) {
+      cards.push(card.name)
+    } else {
+      nbFound += 1
+    }
+  }
+  nbCardsFound[currentTeam.value] += nbFound
   cards = shuffle(cards)
-  nextCard(false)
+
+  /** Go to the recap view if all cards were found */
+  if (cards.length === 0) {
+    localStorage.setItem('nbCardsFound' + props.roundNumber, JSON.stringify(nbCardsFound))
+    localStorage.setItem('nextTeamToPlay', getNextTeam())
+    router.push('/recap-manche-' + props.roundNumber)
+  }
+
+  /** Prepare game for the next team */
+  cardsGuessed = reactive([])
+  currentTeam.value = getNextTeam()
+  timeIsRunning.value = true
+  currentCard.value = cards[0]
 }
 
 const timeIsUp = () => {
   timeIsRunning.value = false
-  currentTeam.value = getNextTeam()
 }
 </script>
 
@@ -89,12 +112,25 @@ const timeIsUp = () => {
         </button>
       </div>
     </div>
-    <round-scores :score1="nbCardsFound[1]" :score2="nbCardsFound[2]" />
+    <round-scores
+      v-if="currentTeam === 1"
+      :score1="nbCardsFound[1] + getNbCardsFound(cardsGuessed)"
+      :score2="nbCardsFound[2]"
+    />
+    <round-scores
+      v-else
+      :score1="nbCardsFound[1]"
+      :score2="nbCardsFound[2] + getNbCardsFound(cardsGuessed)"
+    />
   </template>
 
   <template v-else>
-    <p>C'est au tour de l'équipe {{ currentTeam }}</p>
-    <button @click="continueGame()">C'est parti !</button>
+    <round-modif
+      :cardsGuessed="cardsGuessed"
+      :currentTeam="currentTeam"
+      @change-card-status="updateCardStatus"
+    />
+    <button class="validate" @click="continueGame()">Valider</button>
   </template>
 </template>
 
@@ -135,6 +171,16 @@ button.action {
 
 button.action:disabled {
   opacity: 0.5;
+}
+
+button.validate {
+  width: 60%;
+  height: 60px;
+  font-size: 2rem;
+  background-color: #1fa5ba;
+  margin-top: 40px;
+  border-radius: 5px;
+  color: white;
 }
 
 .card {
