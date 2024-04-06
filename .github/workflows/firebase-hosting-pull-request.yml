@@ -19,3 +19,11 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LA_DUREE_EST_ECOULEE_2 }}'
           projectId: la-duree-est-ecoulee-2
+  commit_formatted_code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run format
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Format code
