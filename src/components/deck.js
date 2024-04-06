@@ -18,8 +18,9 @@ export const initDeck = (numberCards) => {
 
 /**
  * Shuffle an array
- * @param {Array<T>} array Array to shuffle
- * @returns {Array<T>} Shuffled array
+ * @template T
+ * @param {Array.<T>} array Array to shuffle
+ * @returns {Array.<T>} Shuffled array
  */
 export const shuffle = (array) => {
   let copy = [...array]
