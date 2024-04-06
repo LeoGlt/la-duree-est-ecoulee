@@ -27,5 +27,12 @@ jobs:
           ref: ${{ github.head_ref }}
       - run: npm ci && npm run format
       - uses: stefanzweifel/git-auto-commit-action@v5
+        id: auto-commit-action
         with:
           commit_message: Format code
+      - name: "Run if changes have been detected"
+        if: steps.auto-commit-action.outputs.changes_detected == 'true'
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            You had not formatted your code you old rascal, don't worry I did it for you 😘      
