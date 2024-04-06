@@ -9,17 +9,17 @@ const props = defineProps({
 const nextRoundNumber = computed(() => +props.roundNumber + 1)
 
 const getNumberCardsFound = (roundNumber, teamNumber) => {
-  let cardsFound = storageInterface['cardsFound' + roundNumber]
-  return cardsFound[teamNumber].length
+  let nbCardsFound = storageInterface['nbCardsFound' + roundNumber]
+  return nbCardsFound[teamNumber]
 }
 
 const getWinnerStr = () => {
   let nbFound1 = 0
   let nbFound2 = 0
   for (let i = 1; i <= 3; i++) {
-    let cardsFound = storageInterface['cardsFound' + i]
-    nbFound1 += cardsFound[1].length
-    nbFound2 += cardsFound[2].length
+    let nbCardsFound = storageInterface['nbCardsFound' + i]
+    nbFound1 += nbCardsFound[1]
+    nbFound2 += nbCardsFound[2]
   }
   if (nbFound1 > nbFound2) {
     return "L'équipe 1 a gagné !"

@@ -17,9 +17,9 @@ const props = defineProps({
 let cards = getDeck()
 
 /** For each team, the list of cards they found */
-const cardsFound = {
-  1: [],
-  2: []
+const nbCardsFound = {
+  1: 0,
+  2: 0
 }
 const timeIsRunning = ref(true)
 const currentCard = ref(cards[0])
@@ -35,13 +35,14 @@ const getNextTeam = () => (currentTeam.value == 1 ? 2 : 1)
 
 const nextCard = (found) => {
   if (found) {
-    cardsFound[currentTeam.value].push(cards.shift())
+    nbCardsFound[currentTeam.value] += 1
+    cards.shift()
   } else {
     cards.push(cards.shift())
   }
 
   if (cards.length === 0) {
-    localStorage.setItem('cardsFound' + props.roundNumber, JSON.stringify(cardsFound))
+    localStorage.setItem('nbCardsFound' + props.roundNumber, JSON.stringify(nbCardsFound))
     localStorage.setItem('nextTeamToPlay', getNextTeam())
     router.push('/recap-manche-' + props.roundNumber)
   }
@@ -88,7 +89,7 @@ const timeIsUp = () => {
         </button>
       </div>
     </div>
-    <round-scores :score1="cardsFound[1].length" :score2="cardsFound[2].length" />
+    <round-scores :score1="nbCardsFound[1]" :score2="nbCardsFound[2]" />
   </template>
 
   <template v-else>
