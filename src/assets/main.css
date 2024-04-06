@@ -2,10 +2,12 @@
   font-family: monospace;
   background-color: #ee6123;
   color: #024333;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 5px;
   background-color: #ee612340;
-  font-size: 3rem;
+  font-size: 2rem;
+  margin-top: 20px;
+  text-align: center;
 }
 
 h1 {
