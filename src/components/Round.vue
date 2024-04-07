@@ -4,7 +4,7 @@ import RoundClock from './RoundClock.vue'
 import RoundScores from './RoundScores.vue'
 import RoundModif from './RoundModif.vue'
 
-import { getNbCardsFound } from '@/components/cardsGuessed'
+import { countCardsFound } from '@/components/cardsShown'
 import { reactive, ref } from 'vue'
 import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
@@ -19,7 +19,7 @@ const props = defineProps({
 let cards = getDeck()
 
 /** Will contain cards found and not found by a team*/
-let cardsGuessed = reactive([])
+let cardsShown = reactive([])
 
 /** For each team, the number of cards they found */
 const nbCardsFound = {
@@ -39,7 +39,7 @@ let currentTeam = ref(storageInterface.nextTeamToPlay)
 const getNextTeam = () => (currentTeam.value == 1 ? 2 : 1)
 
 const nextCard = (found) => {
-  cardsGuessed.push({ name: cards.shift(), found: found })
+  cardsShown.push({ name: cards.shift(), found: found })
 
   if (cards.length === 0) {
     timeIsRunning.value = false
@@ -51,36 +51,41 @@ const nextCard = (found) => {
   setTimeout(() => (nextCardIsDisabled.value = false), 800)
 }
 
-const updateCardStatus = (data) => {
-  const index = data.message
-  cardsGuessed[index].found = !cardsGuessed[index].found
+const updateCardStatus = (cardShownIndex) => {
+  cardsShown[cardShownIndex].found = !cardsShown[cardShownIndex].found
 }
 
-const continueGame = () => {
-  /** Count cards found and put cards not found back in the cards*/
-  let nbFound = 0
-  for (const card of cardsGuessed) {
-    if (!card.found) {
-      cards.push(card.name)
-    } else {
-      nbFound += 1
-    }
-  }
+const reviewPreviousTurn = () => {
+  const nbFound = countCardsFound(cardsShown)
   nbCardsFound[currentTeam.value] += nbFound
+
+  /** Put cards not found back in the deck */
+  const notFoundCards = cardsShown.filter((card) => !card.found).map((card) => card.name)
+  cards = cards.concat(notFoundCards)
+}
+
+const changeRound = () => {
+  storageInterface['nbCardsFound' + props.roundNumber] = nbCardsFound
+  storageInterface.nextTeamToPlay = getNextTeam()
+  router.push('/recap-manche-' + props.roundNumber)
+}
+
+const prepareNextTeamTurn = () => {
   cards = shuffle(cards)
-
-  /** Go to the recap view if all cards were found */
-  if (cards.length === 0) {
-    localStorage.setItem('nbCardsFound' + props.roundNumber, JSON.stringify(nbCardsFound))
-    localStorage.setItem('nextTeamToPlay', getNextTeam())
-    router.push('/recap-manche-' + props.roundNumber)
-  }
-
-  /** Prepare game for the next team */
-  cardsGuessed = reactive([])
+  cardsShown = reactive([])
   currentTeam.value = getNextTeam()
   timeIsRunning.value = true
   currentCard.value = cards[0]
+}
+
+const continueGame = () => {
+  reviewPreviousTurn()
+
+  if (cards.length === 0) {
+    changeRound()
+  }
+
+  prepareNextTeamTurn()
 }
 
 const timeIsUp = () => {
@@ -114,19 +119,19 @@ const timeIsUp = () => {
     </div>
     <round-scores
       v-if="currentTeam === 1"
-      :score1="nbCardsFound[1] + getNbCardsFound(cardsGuessed)"
+      :score1="nbCardsFound[1] + countCardsFound(cardsShown)"
       :score2="nbCardsFound[2]"
     />
     <round-scores
       v-else
       :score1="nbCardsFound[1]"
-      :score2="nbCardsFound[2] + getNbCardsFound(cardsGuessed)"
+      :score2="nbCardsFound[2] + countCardsFound(cardsShown)"
     />
   </template>
 
   <template v-else>
     <round-modif
-      :cardsGuessed="cardsGuessed"
+      :cardsShown="cardsShown"
       :currentTeam="currentTeam"
       @change-card-status="updateCardStatus"
     />
@@ -209,3 +214,4 @@ button.validate {
   display: flex;
 }
 </style>
+@/components/cardsShowned
