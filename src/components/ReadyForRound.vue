@@ -2,7 +2,7 @@
 import storageInterface from '@/storage-interface'
 
 const rules = {
-  1: 'Tu peux dire tout ce que tu veux !',
+  1: 'Tu peux dire tout ce que tu veux, sauf une partie du mot !',
   2: "Tu ne peux dire qu'un seul mot !",
   3: 'Tu dois mimer !'
 }
