@@ -1,26 +1,23 @@
 <script setup>
-import { getNbCardsFound } from '@/components/cardsGuessed'
+import { countCardsFound } from '@/components/cardsShown'
 
 defineProps({
-  cardsGuessed: { type: Array, required: true },
+  cardsShown: { type: Array, required: true },
   currentTeam: { type: Number, required: true }
 })
 
 const emit = defineEmits(['changeCardStatus'])
 
-const changeCardStatus = (index) => {
-  emit('changeCardStatus', { message: index })
+const changeCardStatus = (cardShownIndex) => {
+  emit('changeCardStatus', cardShownIndex)
 }
 </script>
 
 <template>
   <h2>Equipe {{ currentTeam }}</h2>
-  <h2>{{ getNbCardsFound(cardsGuessed) }} cartes trouvées</h2>
-  <div class="card-guessed" v-for="(item, index) in cardsGuessed" :key="index">
-    <button
-      :class="{ found: item.found, 'not-found': !item.found }"
-      @click="changeCardStatus(index)"
-    >
+  <h2>{{ countCardsFound(cardsShown) }} cartes trouvées</h2>
+  <div class="card-guessed" v-for="(item, cardShownIndex) in cardsShown" :key="cardShownIndex">
+    <button :class="{ found: item.found }" @click="changeCardStatus(cardShownIndex)">
       {{ item.found ? '✔ ' : '✗ ' }}{{ item.name }}
     </button>
   </div>
@@ -42,7 +39,7 @@ button.found {
   background-color: #1bb116b2;
 }
 
-button.not-found {
+button:not(found) {
   background-color: #cd350b9e;
 }
 </style>
