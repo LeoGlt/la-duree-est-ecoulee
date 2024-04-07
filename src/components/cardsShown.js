@@ -5,7 +5,6 @@
  * @property {boolean} found - Wether the card was found
  */
 
-
 /**
  * Returns the number of cards found in an array of cards guessed
  * @param {Array.<Card>} cardsShown Array of cards guesses
