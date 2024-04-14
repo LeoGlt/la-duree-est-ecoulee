@@ -89,6 +89,7 @@ const continueGame = () => {
 }
 
 const timeIsUp = () => {
+  cardsShown.push({ name: cards.shift(), found: false })
   timeIsRunning.value = false
 }
 </script>
