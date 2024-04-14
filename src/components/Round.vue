@@ -28,6 +28,7 @@ const nbCardsFound = {
   1: 0,
   2: 0
 }
+const isPlaying = ref(true)
 const timeIsRunning = ref(true)
 const currentCard = ref(cards[0])
 const nextCardIsDisabled = ref(false)
@@ -45,6 +46,7 @@ const nextCard = (found) => {
 
   if (cards.length === 0) {
     timeIsRunning.value = false
+    isPlaying.value = false
   }
 
   currentCard.value = cards[0]
@@ -76,8 +78,8 @@ const prepareNextTeamTurn = () => {
   cards = shuffle(cards)
   cardsShown = reactive([])
   currentTeam.value = getNextTeam()
-  timeIsRunning.value = true
-  currentCard.value = cards[0]
+  isPlaying.value = true
+  currentCard.value = ''
 }
 
 const continueGame = () => {
@@ -90,46 +92,57 @@ const continueGame = () => {
   prepareNextTeamTurn()
 }
 
+const startClock = () => {
+  timeIsRunning.value = true
+  currentCard.value = cards[0]
+}
+
 const timeIsUp = () => {
   cardsShown.push({ name: cards.shift(), found: false })
   timeIsRunning.value = false
+  isPlaying.value = false
 }
 </script>
 
 <template>
-  <template v-if="timeIsRunning">
+  <template v-if="isPlaying">
     <round-header :roundNumber="props.roundNumber"></round-header>
-    <round-clock @on-time-is-up="timeIsUp" />
+    <round-clock :time-is-running="timeIsRunning" @on-time-is-up="timeIsUp" />
     <p class="team">Equipe {{ currentTeam }}</p>
     <round-card :current-card="currentCard"></round-card>
-    <div class="next-card-container">
-      <button
-        class="next-card action success"
-        :disabled="nextCardIsDisabled"
-        @click="nextCard(true)"
-      >
-        ✔
-      </button>
-      <div v-if="props.roundNumber > 1">
+    <template v-if="timeIsRunning">
+      <div class="next-card-container">
         <button
-          class="next-card action failure"
+          class="next-card action success"
           :disabled="nextCardIsDisabled"
-          @click="nextCard(false)"
+          @click="nextCard(true)"
         >
-          ×
+          ✔
         </button>
+        <div v-if="props.roundNumber > 1">
+          <button
+            class="next-card action failure"
+            :disabled="nextCardIsDisabled"
+            @click="nextCard(false)"
+          >
+            ×
+          </button>
+        </div>
       </div>
-    </div>
-    <round-scores
-      v-if="currentTeam === 1"
-      :score1="nbCardsFound[1] + countCardsFound(cardsShown)"
-      :score2="nbCardsFound[2]"
-    />
-    <round-scores
-      v-else
-      :score1="nbCardsFound[1]"
-      :score2="nbCardsFound[2] + countCardsFound(cardsShown)"
-    />
+      <round-scores
+        v-if="currentTeam === 1"
+        :score1="nbCardsFound[1] + countCardsFound(cardsShown)"
+        :score2="nbCardsFound[2]"
+      />
+      <round-scores
+        v-else
+        :score1="nbCardsFound[1]"
+        :score2="nbCardsFound[2] + countCardsFound(cardsShown)"
+      />
+    </template>
+    <template v-else>
+      <button @click="startClock()">C'est parti !</button>
+    </template>
   </template>
 
   <template v-else>
