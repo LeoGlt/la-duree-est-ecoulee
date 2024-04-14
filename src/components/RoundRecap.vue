@@ -30,7 +30,6 @@ const getWinnerStr = () => {
     return 'Il y a égalité !'
   }
 }
-
 </script>
 
 <template>
