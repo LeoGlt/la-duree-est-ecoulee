@@ -1,7 +1,6 @@
 <script setup>
-
 defineProps({
-  currentCard: { type: String, required: true },
+  currentCard: { type: String, required: true }
 })
 </script>
 
@@ -23,9 +22,9 @@ defineProps({
   width: 80%;
   height: 200px;
   border-radius: 9px;
-  background: radial-gradient(83.31% 50.39% at 50% 49.74%, #FBD7C8 51%, #EE6123 100%);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);:
-  font-weight: 700;
+  background: radial-gradient(83.31% 50.39% at 50% 49.74%, #fbd7c8 51%, #ee6123 100%);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+  :font-weight: 700;
 }
 .inner-card {
   border-radius: 9px;

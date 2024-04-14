@@ -151,8 +151,7 @@ const timeIsUp = () => {
   font-size: 2rem;
   font-weight: 700;
   margin-top: 20px;
-  color : #024333;
-
+  color: #024333;
 }
 .success,
 .failure {
