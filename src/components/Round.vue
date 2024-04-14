@@ -8,6 +8,8 @@ import { countCardsFound } from '@/components/cardsShown'
 import { reactive, ref } from 'vue'
 import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
+import RoundHeader from '@/components/RoundHeader.vue'
+import RoundCard from '@/components/RoundCard.vue'
 
 const router = useRouter()
 
@@ -96,10 +98,10 @@ const timeIsUp = () => {
 
 <template>
   <template v-if="timeIsRunning">
-    <h1>Ceci est la manche {{ props.roundNumber }}</h1>
-    <p>Equipe {{ currentTeam }}</p>
+    <round-header :roundNumber="props.roundNumber"></round-header>
     <round-clock @on-time-is-up="timeIsUp" />
-    <h2 class="card">{{ currentCard }}</h2>
+    <p class="team">Equipe {{ currentTeam }}</p>
+    <round-card :current-card="currentCard"></round-card>
     <div class="next-card-container">
       <button
         class="next-card action success"
@@ -146,14 +148,19 @@ const timeIsUp = () => {
   width: 100px;
   height: 100px;
 }
-
+.team {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #024333;
+}
 .success,
 .failure {
   color: white;
 }
 
 .success {
-  background-color: #00916e;
+  background-color: #024333;
 }
 
 .failure {
@@ -162,10 +169,10 @@ const timeIsUp = () => {
 
 button.action {
   border: none;
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   border-radius: 298px;
-  font-size: 6rem;
+  font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,20 +194,6 @@ button.validate {
   margin-top: 40px;
   border-radius: 5px;
   color: white;
-}
-
-.card {
-  background-color: #ffcf00;
-  color: #664a05;
-  min-height: 100px;
-  min-width: 80%;
-  max-width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .clock {
