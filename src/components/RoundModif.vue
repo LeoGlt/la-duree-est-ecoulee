@@ -15,7 +15,6 @@ const emit = defineEmits(['changeCardStatus'])
 const changeCardStatus = (cardShownIndex) => {
   emit('changeCardStatus', cardShownIndex)
 }
-
 </script>
 
 <template>
@@ -67,7 +66,6 @@ button {
     margin: 0 auto;
     width: 50px;
   }
-
 }
 
 button.found {

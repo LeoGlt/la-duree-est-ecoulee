@@ -128,19 +128,19 @@ const timeIsUp = () => {
             @click="nextCard(false)"
           >
             <cross-svg></cross-svg>
-        </button>
+          </button>
+        </div>
       </div>
-    </div>
-<!--    <round-scores-->
-  <!--      v-if="currentTeam === 1"-->
-  <!--      :score1="nbCardsFound[1] + countCardsFound(cardsShown)"-->
-  <!--      :score2="nbCardsFound[2]"-->
-  <!--    />-->
-<!--    <round-scores-->
-  <!--      v-else-->
-  <!--      :score1="nbCardsFound[1]"-->
-  <!--      :score2="nbCardsFound[2] + countCardsFound(cardsShown)"-->
-  <!--    />-->
+      <!--    <round-scores-->
+      <!--      v-if="currentTeam === 1"-->
+      <!--      :score1="nbCardsFound[1] + countCardsFound(cardsShown)"-->
+      <!--      :score2="nbCardsFound[2]"-->
+      <!--    />-->
+      <!--    <round-scores-->
+      <!--      v-else-->
+      <!--      :score1="nbCardsFound[1]"-->
+      <!--      :score2="nbCardsFound[2] + countCardsFound(cardsShown)"-->
+      <!--    />-->
     </template>
     <template v-else>
       <button @click="startClock()">C'est parti !</button>
@@ -157,7 +157,7 @@ const timeIsUp = () => {
   </template>
 </template>
 
-<style scoped  lang="scss">
+<style scoped lang="scss">
 @import '@/assets/main';
 .next-card {
   font-size: 3rem;
@@ -180,7 +180,7 @@ const timeIsUp = () => {
 }
 
 .failure {
-  background-color: $primary-color
+  background-color: $primary-color;
 }
 
 button.action {

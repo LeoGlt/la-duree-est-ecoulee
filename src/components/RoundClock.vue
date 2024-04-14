@@ -12,12 +12,11 @@ let remainingTime = ref(initialTime)
 
 const emit = defineEmits(['onTimeIsUp'])
 
-
 const launchClockIfTimeIsRunning = () => {
   if (timeIsRunningRef.value) {
     setInterval(() => {
       if (remainingTime.value > 0) {
-        remainingTime.value -= .1
+        remainingTime.value -= 0.1
       } else {
         emit('onTimeIsUp')
       }
@@ -37,10 +36,20 @@ watch(
 </script>
 
 <template>
-  <div class="pie" :style="{'background-image': 'conic-gradient(rgba(238, 97, 35, 0.4) '+(remainingTime/initialTime)*100+'%, transparent '+(remainingTime/initialTime)*100+'% 100%)' }" data-time="remainingTime">
+  <div
+    class="pie"
+    :style="{
+      'background-image':
+        'conic-gradient(rgba(238, 97, 35, 0.4) ' +
+        (remainingTime / initialTime) * 100 +
+        '%, transparent ' +
+        (remainingTime / initialTime) * 100 +
+        '% 100%)'
+    }"
+    data-time="remainingTime"
+  >
     <div>{{ Math.ceil(remainingTime) }}</div>
   </div>
-
 </template>
 
 <style scoped lang="scss">
