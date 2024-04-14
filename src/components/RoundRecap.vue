@@ -2,6 +2,7 @@
 import storageInterface from '@/storage-interface'
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import RoundHeader from '@/components/RoundHeader.vue'
 
 const props = defineProps({
   roundNumber: { type: Number, required: true }
@@ -32,6 +33,7 @@ const getWinnerStr = () => {
 </script>
 
 <template>
+  <round-header :roundNumber="props.roundNumber"></round-header>
   <h1>Scores</h1>
   <table>
     <thead>

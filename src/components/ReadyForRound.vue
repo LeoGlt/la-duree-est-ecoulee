@@ -1,5 +1,6 @@
 <script setup>
 import storageInterface from '@/storage-interface'
+import RoundHeader from '@/components/RoundHeader.vue'
 
 const rules = {
   1: 'Tu peux dire tout ce que tu veux, sauf une partie du mot !',
@@ -13,6 +14,7 @@ defineProps({
 </script>
 
 <template>
+  <round-header :round-number="roundNumber"></round-header>
   <h1>Manche {{ roundNumber }}</h1>
   <h2 class="rules">{{ rules[roundNumber] }}</h2>
   <RouterLink class="action" :to="'/manche-' + roundNumber"

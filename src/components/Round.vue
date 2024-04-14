@@ -10,6 +10,8 @@ import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
 import RoundHeader from '@/components/RoundHeader.vue'
 import RoundCard from '@/components/RoundCard.vue'
+import CheckSvg from '@/components/CheckSvg.vue'
+import CrossSvg from '@/components/CrossSvg.vue'
 
 const router = useRouter()
 
@@ -105,8 +107,8 @@ const timeIsUp = () => {
 </script>
 
 <template>
+  <round-header :roundNumber="props.roundNumber"></round-header>
   <template v-if="isPlaying">
-    <round-header :roundNumber="props.roundNumber"></round-header>
     <round-clock :time-is-running="timeIsRunning" @on-time-is-up="timeIsUp" />
     <p class="team">Equipe {{ currentTeam }}</p>
     <round-card :current-card="currentCard"></round-card>
@@ -117,7 +119,7 @@ const timeIsUp = () => {
           :disabled="nextCardIsDisabled"
           @click="nextCard(true)"
         >
-          ✔
+          <check-svg></check-svg>
         </button>
         <div v-if="props.roundNumber > 1">
           <button
@@ -125,20 +127,20 @@ const timeIsUp = () => {
             :disabled="nextCardIsDisabled"
             @click="nextCard(false)"
           >
-            ×
-          </button>
-        </div>
+            <cross-svg></cross-svg>
+        </button>
       </div>
-      <round-scores
-        v-if="currentTeam === 1"
-        :score1="nbCardsFound[1] + countCardsFound(cardsShown)"
-        :score2="nbCardsFound[2]"
-      />
-      <round-scores
-        v-else
-        :score1="nbCardsFound[1]"
-        :score2="nbCardsFound[2] + countCardsFound(cardsShown)"
-      />
+    </div>
+<!--    <round-scores-->
+  <!--      v-if="currentTeam === 1"-->
+  <!--      :score1="nbCardsFound[1] + countCardsFound(cardsShown)"-->
+  <!--      :score2="nbCardsFound[2]"-->
+  <!--    />-->
+<!--    <round-scores-->
+  <!--      v-else-->
+  <!--      :score1="nbCardsFound[1]"-->
+  <!--      :score2="nbCardsFound[2] + countCardsFound(cardsShown)"-->
+  <!--    />-->
     </template>
     <template v-else>
       <button @click="startClock()">C'est parti !</button>
@@ -155,7 +157,8 @@ const timeIsUp = () => {
   </template>
 </template>
 
-<style scoped>
+<style scoped  lang="scss">
+@import '@/assets/main';
 .next-card {
   font-size: 3rem;
   width: 100px;
@@ -165,7 +168,7 @@ const timeIsUp = () => {
   font-size: 2rem;
   font-weight: 700;
   margin-top: 20px;
-  color: #024333;
+  color: $secondary-color;
 }
 .success,
 .failure {
@@ -173,18 +176,18 @@ const timeIsUp = () => {
 }
 
 .success {
-  background-color: #024333;
+  background-color: $secondary-color;
 }
 
 .failure {
-  background-color: #fa003f;
+  background-color: $primary-color
 }
 
 button.action {
   border: none;
   width: 100px;
   height: 100px;
-  border-radius: 298px;
+  border-radius: 300px;
   font-size: 4rem;
   display: flex;
   justify-content: center;
@@ -203,7 +206,7 @@ button.validate {
   width: 60%;
   height: 60px;
   font-size: 2rem;
-  background-color: #1fa5ba;
+  background-color: $secondary-color;
   margin-top: 40px;
   border-radius: 5px;
   color: white;
@@ -214,11 +217,12 @@ button.validate {
   font-size: 3rem;
   font-family: monospace;
   line-height: 0;
-  color: #ee6123;
+  color: $primary-color;
 }
 
 .next-card-container {
   display: flex;
+  gap: 20px;
 }
 </style>
 @/components/cardsShowned

@@ -18,7 +18,8 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import '@/assets/main';
 .round-header {
   display: flex;
   justify-content: space-around;
@@ -33,7 +34,7 @@ defineProps({
   justify-content: center;
   align-items: center;
   border-radius: 9px;
-  background: rgba(238, 97, 35, 0.4);
+  background: $primary-light;
   width: 57px;
   height: 53px;
   flex-shrink: 0;
