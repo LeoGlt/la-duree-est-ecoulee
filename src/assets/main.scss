@@ -1,0 +1,43 @@
+// variables
+$primary-color: #ee6123;
+$secondary-color: #024333;
+$error-color: #ff1f1f;
+$background-color: #fbd7c8;
+$primary-light: rgba(238, 97, 35, 0.4);
+button,
+.action {
+  font-family: Inter, sans-serif;
+  background-color: #ee6123;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  width: 250px;
+  margin: 5px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+h1 {
+  color: #ee6123;
+}
+
+body {
+  background-color: $background-color;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter, sans-serif;
+  gap: 20px;
+}

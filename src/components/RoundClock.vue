@@ -16,11 +16,11 @@ const launchClockIfTimeIsRunning = () => {
   if (timeIsRunningRef.value) {
     setInterval(() => {
       if (remainingTime.value > 0) {
-        remainingTime.value -= 1
+        remainingTime.value -= 0.1
       } else {
         emit('onTimeIsUp')
       }
-    }, 1000)
+    }, 100)
   }
 }
 
@@ -36,5 +36,44 @@ watch(
 </script>
 
 <template>
-  <h2>{{ remainingTime }}</h2>
+  <div
+    class="pie"
+    :style="{
+      'background-image':
+        'conic-gradient(rgba(238, 97, 35, 0.4) ' +
+        (remainingTime / initialTime) * 100 +
+        '%, transparent ' +
+        (remainingTime / initialTime) * 100 +
+        '% 100%)'
+    }"
+    data-time="remainingTime"
+  >
+    <div>{{ Math.ceil(remainingTime) }}</div>
+  </div>
 </template>
+
+<style scoped lang="scss">
+@import '@/assets/main';
+.pie {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: background-image 1s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color;
+    font-weight: 700;
+    font-size: 2rem;
+    color: $primary-light;
+    position: absolute;
+  }
+}
+</style>
