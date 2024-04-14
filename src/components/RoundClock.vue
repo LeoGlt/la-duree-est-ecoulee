@@ -16,11 +16,11 @@ const launchClockIfTimeIsRunning = () => {
   if (timeIsRunningRef.value) {
     setInterval(() => {
       if (remainingTime.value > 0) {
-        remainingTime.value -= 0.1
+        remainingTime.value -= 0.03
       } else {
         emit('onTimeIsUp')
       }
-    }, 100)
+    }, 30)
   }
 }
 
@@ -55,16 +55,16 @@ watch(
 <style scoped lang="scss">
 @import '@/assets/main';
 .pie {
-  width: 200px;
-  height: 200px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   transition: background-image 1s linear;
   display: flex;
   justify-content: center;
   align-items: center;
   div {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

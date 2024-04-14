@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div class="card">
-    <div class="inner-card">
+    <div class="inner-card" v-if="currentCard">
       {{ currentCard }}
     </div>
   </div>
@@ -38,5 +38,6 @@ defineProps({
   background-color: #ffffff;
   max-width: calc(550px - 2rem);
   max-height: calc(300px - 2rem);
+  text-align: center;
 }
 </style>
