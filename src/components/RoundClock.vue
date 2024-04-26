@@ -55,16 +55,16 @@ watch(
 <style scoped lang="scss">
 @import '@/assets/main';
 .pie {
-  width: 170px;
-  height: 170px;
+  width: 20vh;
+  height: 20vh;
   border-radius: 50%;
   transition: background-image 1s linear;
   display: flex;
   justify-content: center;
   align-items: center;
   div {
-    width: 130px;
-    height: 130px;
+    width: 15vh;
+    height: 15vh;
     border-radius: 50%;
     display: flex;
     justify-content: center;

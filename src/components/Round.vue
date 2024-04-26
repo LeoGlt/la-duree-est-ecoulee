@@ -167,7 +167,7 @@ const timeIsUp = () => {
 .team {
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 20px;
+  margin: 0;
   color: $secondary-color;
 }
 .success,
