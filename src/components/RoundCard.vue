@@ -18,7 +18,7 @@ defineProps({
   justify-content: center;
   align-items: center;
   max-width: 40vh;
-  max-height: 20vh;
+  max-height: 25vh;
   width: 80%;
   height: 200px;
   border-radius: 9px;
