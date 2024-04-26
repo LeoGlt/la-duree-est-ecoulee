@@ -17,8 +17,8 @@ defineProps({
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 550px;
-  max-height: 300px;
+  max-width: 40vh;
+  max-height: 20vh;
   width: 80%;
   height: 200px;
   border-radius: 9px;
