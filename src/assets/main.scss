@@ -1,13 +1,18 @@
 // variables
 $primary-color: #ee6123;
+$primary-color-hover: #f89a71;
+$white: #fff;
+$white-hover: #f8eae5;
 $secondary-color: #024333;
 $error-color: #ff1f1f;
 $background-color: #fbd7c8;
 $primary-light: rgba(238, 97, 35, 0.4);
 button,
 .action {
+  font-weight: 600;
   font-family: Inter, sans-serif;
-  background-color: #ee6123;
+  background-color: white;
+  color: $primary-color;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -23,7 +28,18 @@ button,
   padding: 15px;
   border-radius: 10px;
   font-size: 1.2rem;
-  color: white;
+  &:hover {
+    background-color: $white-hover;
+  }
+  &.primary {
+    color: white;
+    background-color: $primary-color;
+
+  }
+  &.secondary {
+    color: white;
+    background-color: $secondary-color;
+  }
 }
 
 h1 {
@@ -32,13 +48,21 @@ h1 {
 
 body {
   background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  //justify-content: center;
   font-family: Inter, sans-serif;
   gap: 20px;
   margin-bottom: 50px;
+  max-width: 1000px;
+  width: 100%;
 }
