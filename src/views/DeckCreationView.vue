@@ -23,6 +23,13 @@ const saveCustomCardAndInitGame = () => {
     addWordsToDB(customCards.value)
   }
 }
+const undo = () => {
+  if (randomCards.value.length) {
+    randomCards.value = []
+  } else {
+    customCards.value.pop()
+  }
+}
 </script>
 
 <template>
@@ -31,15 +38,15 @@ const saveCustomCardAndInitGame = () => {
   <template v-if="customCards.length + randomCards.length < storageInterface.deckSize">
     <input type="text" v-model="currentSuggestion" />
     <button @click="addCustomCard" :disabled="currentSuggestion === ''">Ajouter</button>
-    <button @click="customCards.pop()" :disabled="customCards.length === 0">↩</button>
+    <button @click="undo" :disabled="customCards.length === 0">↩</button>
     <button class="secondary" @click="fillDeckWithRandomCards">Compléter le reste</button>
     <label for="allow-data-share">
-      Je transmets mes idées aux créateurs de la durée est écoulée pour qu'ils enrichissent le jeu
+      J'aide les créateurs de la durée est écoulée en leur transmettant mes idées de cartes
     </label>
     <input type="checkbox" v-model="dataSharingConsent" name="allow-data-share" />
   </template>
   <template v-else>
-    <button @click="customCards.pop()">↩</button>
+    <button @click="undo">↩</button>
     <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="saveCustomCardAndInitGame">
       Démarrer la partie
     </RouterLink>

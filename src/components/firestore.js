@@ -1,8 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore, writeBatch, doc } from 'firebase/firestore'
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://support.google.com/firebase/answer/7015592
 const firebaseConfig = {
   apiKey: 'AIzaSyAPJGF_GCAp5dOUa4TAAqsBMl7tyqvbDbQ',
   authDomain: 'la-duree-est-ecoulee-2.firebaseapp.com',
@@ -12,10 +10,8 @@ const firebaseConfig = {
   appId: '1:340354158542:web:7189cdcf604088b0d3259f'
 }
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig)
 
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app)
 
 /**
