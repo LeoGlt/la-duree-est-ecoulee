@@ -32,6 +32,7 @@ button,
   color: white; 
   &:disabled {
     opacity: 0.5;
+  }
   &:hover {
     background-color: $white-hover;
   }
