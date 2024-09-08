@@ -10,8 +10,8 @@ import { getDeck, shuffle } from './deck'
 import storageInterface from '@/storage-interface'
 import RoundHeader from '@/components/RoundHeader.vue'
 import RoundCard from '@/components/RoundCard.vue'
-import CheckSvg from '@/components/CheckSvg.vue'
-import CrossSvg from '@/components/CrossSvg.vue'
+import CheckSvg from '@/components/Svg/CheckSvg.vue'
+import CrossSvg from '@/components/Svg/CrossSvg.vue'
 
 const router = useRouter()
 
