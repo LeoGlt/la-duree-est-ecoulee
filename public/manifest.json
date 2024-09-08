@@ -1,7 +1,7 @@
 {
     "name": "La durée est écoulée",
     "short_name": "La durée est écoulée",
-    "theme_color": "#2196f3",
+    "theme_color": "#FBD7C8",
     "background_color": "#FBD7C8",
     "display": "standalone",
     "orientation": "portrait",
