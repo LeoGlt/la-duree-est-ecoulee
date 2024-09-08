@@ -25,8 +25,8 @@ const fillDeckWithRandomCards = () => {
     <button class="secondary" @click="fillDeckWithRandomCards">Compléter le reste</button>
   </template>
   <template v-else>
-    <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="initGame(customCards)"
-      >Démarrer la partie</RouterLink
-    >
+    <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="initGame(customCards)">
+      Démarrer la partie
+    </RouterLink>
   </template>
 </template>

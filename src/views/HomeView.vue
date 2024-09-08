@@ -17,7 +17,8 @@ let deckSize
     class="action primary"
     to="/cest-parti-pour-la-manche-1"
     @click="initGame(getRandomDeck(storageInterface.deckSize))"
-    >Partie classique</RouterLink
   >
+    Partie classique
+  </RouterLink>
   <RouterLink class="action secondary" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
 </template>
