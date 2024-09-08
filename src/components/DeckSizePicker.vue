@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import CrossSvg from '@/components/Svg/CrossSvg.vue'
 import LessSvg from '@/components/Svg/LessSvg.vue'
 
+
 const emit = defineEmits(['changeDeckSize'])
 
 const defaultDeckSize = +import.meta.env.VITE_DEFAULT_DECK_SIZE

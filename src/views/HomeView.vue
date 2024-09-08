@@ -20,5 +20,5 @@ let deckSize
   >
     Partie classique
   </RouterLink>
-  <RouterLink class="action secondary" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
+  <RouterLink class="action" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
 </template>
