@@ -22,7 +22,7 @@ const initGame = (deck) => {
   <DeckSizePicker @change-deck-size="(value) => (storageInterface.deckSize = value)" />
 
   <RouterLink
-    class="action"
+    class="action primary"
     to="/cest-parti-pour-la-manche-1"
     @click="initGame(initDeck(storageInterface.deckSize))"
     >Partie classique</RouterLink
