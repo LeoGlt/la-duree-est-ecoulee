@@ -1,9 +1,7 @@
 <script setup>
 import { countCardsFound } from '@/components/cardsShown'
-import CrossSvg from '@/components/CrossSvg.vue'
-import CheckSvg from '@/components/CheckSvg.vue'
-// import CheckSvg from '@/assets/check.svg';
-// import CrossSvg from '@/assets/cross.svg';
+import CrossSvg from '@/components/Svg/CrossSvg.vue'
+import CheckSvg from '@/components/Svg/CheckSvg.vue'
 
 defineProps({
   cardsShown: { type: Array, required: true },
