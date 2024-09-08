@@ -9,11 +9,12 @@ export const getDeck = () => {
 }
 
 /**
- * Initialize a deck by randomly selecting cards, and store it in the local storage.
+ * Initialize a deck by randomly selecting cards.
  * @param {number} deckSize Number of cards to put in the deck
  */
 export const initDeck = (deckSize) => {
-  storageInterface.deck = shuffle(characters).splice(0, deckSize)
+  const deck = shuffle(characters).splice(0, deckSize)
+  return deck
 }
 
 /**

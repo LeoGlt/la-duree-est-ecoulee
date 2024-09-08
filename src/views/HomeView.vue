@@ -6,11 +6,11 @@ import DeckSizePicker from '../components/DeckSizePicker.vue'
 
 let deckSize
 
-const initGame = () => {
+const initGame = (deck) => {
   storageInterface.cardsFound1 = undefined
   storageInterface.cardsFound2 = undefined
   storageInterface.cardsFound3 = undefined
-  initDeck(deckSize)
+  storageInterface.deck = deck
   storageInterface.nextTeamToPlay = 1
 }
 </script>
@@ -19,7 +19,13 @@ const initGame = () => {
   <h1>La durée est écoulée</h1>
   <h2>Faites 2 équipes !</h2>
 
-  <DeckSizePicker @change-deck-size="(value) => (deckSize = value)" />
+  <DeckSizePicker @change-deck-size="(value) => (storageInterface.deckSize = value)" />
 
-  <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="initGame">Jouer</RouterLink>
+  <RouterLink
+    class="action"
+    to="/cest-parti-pour-la-manche-1"
+    @click="initGame(initDeck(storageInterface.deckSize))"
+    >Partie classique</RouterLink
+  >
+  <RouterLink class="action secondary" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
 </template>

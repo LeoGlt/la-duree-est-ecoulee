@@ -23,7 +23,14 @@ button,
   padding: 15px;
   border-radius: 10px;
   font-size: 1.2rem;
-  color: white;
+  color: white; 
+  &.secondary {
+    background-color: white;
+    color: #ee6123;
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 h1 {
