@@ -31,6 +31,7 @@ self.addEventListener("install", function(event) {
   
   var addToCache = function(request){
     return caches.open("offline").then(function (cache) {
+      console.log("url", request.url)
       return fetch(request).then(function (response) {
         console.log(response.url + " was cached");
         return cache.put(request, response);
