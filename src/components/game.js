@@ -45,7 +45,7 @@ export const shuffle = (array) => {
 
 /**
  * Initialize variables necessary to create a game in the storage interface
- * @param {string[]} deck 
+ * @param {string[]} deck
  */
 export const initGame = (deck) => {
   storageInterface.cardsFound1 = undefined
