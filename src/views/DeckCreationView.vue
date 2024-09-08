@@ -22,9 +22,11 @@ const fillDeckWithRandomCards = () => {
   <template v-if="customCards.length < storageInterface.deckSize">
     <input type="text" v-model="currentSuggestion" />
     <button @click="addCustomCard" :disabled="currentSuggestion === ''">Ajouter</button>
+    <button @click="customCards.pop()" :disabled="customCards.length === 0">↩</button>
     <button class="secondary" @click="fillDeckWithRandomCards">Compléter le reste</button>
   </template>
   <template v-else>
+    <button @click="customCards.pop()">↩</button>
     <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="initGame(customCards)">
       Démarrer la partie
     </RouterLink>
