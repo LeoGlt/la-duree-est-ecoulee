@@ -11,8 +11,8 @@ emit('changeDeckSize', defaultDeckSize)
 const deckSize = ref(defaultDeckSize)
 
 function increment(value) {
-  if(deckSize.value + value < 10) return
-  if(deckSize.value + value > 50) return
+  if (deckSize.value + value < 10) return
+  if (deckSize.value + value > 50) return
   deckSize.value = deckSize.value + value
   emit('changeDeckSize', deckSize.value)
 }
@@ -22,18 +22,19 @@ function increment(value) {
   <h3>Combien veux-tu de cartes ?</h3>
   <div class="container">
     <div class="decksize-actions">
-      <button :disabled="deckSize === 50" @click="increment(10)"><cross-svg :style="{transform : 'rotate(-45deg)'}"></cross-svg></button>
-      <span>{{deckSize}} cartes</span>
-      <button :disabled="deckSize === 10"  @click="increment(-10)"><less-svg></less-svg></button>
+      <button :disabled="deckSize === 50" @click="increment(10)">
+        <cross-svg :style="{ transform: 'rotate(-45deg)' }"></cross-svg>
+      </button>
+      <span>{{ deckSize }} cartes</span>
+      <button :disabled="deckSize === 10" @click="increment(-10)"><less-svg></less-svg></button>
     </div>
     <div class="card-container">
-      <div  v-for="i in Math.floor(deckSize/10)" :key="i" class="card" ></div>
+      <div v-for="i in Math.floor(deckSize / 10)" :key="i" class="card"></div>
     </div>
   </div>
   <span v-if="deckSize === 10">&nbsp;&nbsp;Pour une partie rapidou 🐰</span>
   <span v-if="deckSize > 10 && deckSize < 50">&nbsp;&nbsp;</span>
   <span v-if="deckSize === 50">&nbsp;&nbsp;Pour les fadas 🤪</span>
-
 </template>
 
 <style scoped lang="scss">
@@ -74,7 +75,7 @@ select {
 }
 
 .card-container {
-  display:  grid;
+  display: grid;
   grid-gap: 0.5rem;
   grid-template-columns: repeat(5, 5px);
   transition: grid-template-columns 0.5s;
