@@ -17,7 +17,7 @@ const handleKeyDown = (event) => {
 <template>
   <div class="card">
     <div class="inner-card">
-      <input type="text" ref='card-input' v-model="model" @keydown="handleKeyDown($event)">
+      <input type="text" ref="card-input" v-model="model" @keydown="handleKeyDown($event)" />
     </div>
   </div>
 </template>

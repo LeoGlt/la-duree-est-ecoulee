@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import CrossSvg from '@/components/Svg/CrossSvg.vue'
 import LessSvg from '@/components/Svg/LessSvg.vue'
 
-
 const emit = defineEmits(['changeDeckSize'])
 
 const defaultDeckSize = +import.meta.env.VITE_DEFAULT_DECK_SIZE
@@ -20,13 +19,12 @@ function increment(value) {
 </script>
 
 <template>
-  <h3>Combien veux-tu de cartes ?</h3>
   <div class="container">
     <div class="decksize-actions">
       <button :disabled="deckSize === 50" @click="increment(10)">
         <cross-svg :style="{ transform: 'rotate(-45deg)' }"></cross-svg>
       </button>
-      <span>{{ deckSize }} cartes</span>
+      <span class="card-number">{{ deckSize }} cartes</span>
       <button :disabled="deckSize === 10" @click="increment(-10)"><less-svg></less-svg></button>
     </div>
     <div class="card-container">
@@ -47,6 +45,11 @@ select {
   min-width: 30%;
   max-width: 90%;
 }
+.card-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $secondary-color;
+}
 .decksize-actions {
   flex-direction: column;
   display: flex;
@@ -62,9 +65,6 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    &:disabled {
-      background-color: $grey;
-    }
   }
 }
 .container {

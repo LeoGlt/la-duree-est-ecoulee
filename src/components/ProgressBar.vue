@@ -3,16 +3,19 @@ const props = defineProps({
   currentValue: { type: Number, required: true },
   completedValue: { type: Number, required: true }
 })
-
 </script>
 
 <template>
-    <div class="progress-bar">
-      <div class="progress" :style="{ width: (currentValue / completedValue) * 100 + '%' }">
-        <div class="text text-min" v-if="currentValue > completedValue/2">{{ currentValue }} / {{ completedValue }} mots</div>
+  <div class="progress-bar">
+    <div class="progress" :style="{ width: (currentValue / completedValue) * 100 + '%' }">
+      <div class="text text-min" v-if="currentValue > completedValue / 2">
+        {{ currentValue }} / {{ completedValue }} mots
       </div>
-      <div class="text text-50-max" v-if="currentValue <= completedValue/2">{{ currentValue }} / {{ completedValue }} mots</div>
     </div>
+    <div class="text text-50-max" v-if="currentValue <= completedValue / 2">
+      {{ currentValue }} / {{ completedValue }} mots
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -50,5 +53,4 @@ const props = defineProps({
   justify-content: center;
   align-items: center;
 }
-
 </style>

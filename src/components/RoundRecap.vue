@@ -32,8 +32,6 @@ const getWinnerStr = () => {
   }
 }
 
-console.log('coucou')
-
 const team1Score = [...Array(props.roundNumber).keys()].map((i) => getNumberCardsFound(i + 1, 1))
 const team2Score = [...Array(props.roundNumber).keys()].map((i) => getNumberCardsFound(i + 1, 2))
 const totalScore =
@@ -50,13 +48,13 @@ const totalScore =
     <score-bar color="secondary" :score="team2Score" :total="totalScore"></score-bar>
   </div>
   <div v-if="props.roundNumber < 3">
-    <RouterLink class="action" :to="'/cest-parti-pour-la-manche-' + nextRoundNumber"
+    <RouterLink class="action primary" :to="'/cest-parti-pour-la-manche-' + nextRoundNumber"
       >Manche {{ nextRoundNumber }}</RouterLink
     >
   </div>
   <template v-else>
     <h2>{{ getWinnerStr() }}</h2>
-    <RouterLink class="action" to="/">Accueil</RouterLink>
+    <RouterLink class="action primary" to="/">Accueil</RouterLink>
   </template>
 </template>
 

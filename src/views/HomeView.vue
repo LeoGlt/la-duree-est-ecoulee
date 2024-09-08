@@ -8,17 +8,17 @@ let deckSize
 </script>
 
 <template>
-  <h1>La durée est écoulée</h1>
+  <img src="@/assets/logo.svg" alt="La durée est écoulée" />
   <h2>Faites 2 équipes !</h2>
-
   <DeckSizePicker @change-deck-size="(value) => (storageInterface.deckSize = value)" />
-
-  <RouterLink
-    class="action primary"
-    to="/cest-parti-pour-la-manche-1"
-    @click="initGame(getRandomDeck(storageInterface.deckSize))"
-  >
-    Partie classique
-  </RouterLink>
-  <RouterLink class="action" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
+  <div>
+    <RouterLink
+      class="action primary"
+      to="/cest-parti-pour-la-manche-1"
+      @click="initGame(getRandomDeck(storageInterface.deckSize))"
+    >
+      Partie classique
+    </RouterLink>
+    <RouterLink class="action" to="/propose-tes-cartes">Propose tes cartes</RouterLink>
+  </div>
 </template>
