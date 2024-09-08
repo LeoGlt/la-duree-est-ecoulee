@@ -6,7 +6,7 @@ import RoundModif from './RoundModif.vue'
 
 import { countCardsFound } from '@/components/cardsShown'
 import { reactive, ref } from 'vue'
-import { getDeck, shuffle } from './deck'
+import { getDeck, shuffle } from './game'
 import storageInterface from '@/storage-interface'
 import RoundHeader from '@/components/RoundHeader.vue'
 import RoundCard from '@/components/RoundCard.vue'
@@ -225,4 +225,3 @@ button.validate {
   gap: 20px;
 }
 </style>
-@/components/cardsShowned

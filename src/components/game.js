@@ -9,10 +9,11 @@ export const getDeck = () => {
 }
 
 /**
- * Initialize a deck by randomly selecting cards.
+ * Create a deck by randomly selecting cards.
  * @param {number} deckSize Number of cards to put in the deck
+ * @returns {string[]} Deck
  */
-export const initDeck = (deckSize) => {
+export const getRandomDeck = (deckSize) => {
   const deck = shuffle(characters).splice(0, deckSize)
   return deck
 }
@@ -40,4 +41,16 @@ export const shuffle = (array) => {
   }
 
   return copy
+}
+
+/**
+ * Initialize variables necessary to create a game in the storage interface
+ * @param {string[]} deck 
+ */
+export const initGame = (deck) => {
+  storageInterface.cardsFound1 = undefined
+  storageInterface.cardsFound2 = undefined
+  storageInterface.cardsFound3 = undefined
+  storageInterface.deck = deck
+  storageInterface.nextTeamToPlay = 1
 }
