@@ -4,17 +4,14 @@ import storageInterface from '@/storage-interface'
  * Get deck from local storage and shuffle it
  * @returns {string[]} Shuffled deck
  */
-export const getDeck = () => {
-  return shuffle(storageInterface.deck)
-}
+export const getDeck = () => shuffle(storageInterface.deck)
 
 /**
- * Initialize a deck by randomly selecting cards, and store it in the local storage.
+ * Create a deck by randomly selecting cards.
  * @param {number} deckSize Number of cards to put in the deck
+ * @returns {string[]} Deck
  */
-export const initDeck = (deckSize) => {
-  storageInterface.deck = shuffle(characters).splice(0, deckSize)
-}
+export const getRandomDeck = (deckSize) => shuffle(characters).splice(0, deckSize)
 
 /**
  * Shuffle an array
@@ -39,4 +36,16 @@ export const shuffle = (array) => {
   }
 
   return copy
+}
+
+/**
+ * Initialize variables necessary to create a game in the storage interface
+ * @param {string[]} deck
+ */
+export const initGame = (deck) => {
+  storageInterface.cardsFound1 = undefined
+  storageInterface.cardsFound2 = undefined
+  storageInterface.cardsFound3 = undefined
+  storageInterface.deck = deck
+  storageInterface.nextTeamToPlay = 1
 }

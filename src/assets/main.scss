@@ -29,12 +29,15 @@ button,
   padding: 15px;
   border-radius: 10px;
   font-size: 1.2rem;
+  &:disabled {
+    opacity: 0.5;
+  }
   &:hover {
     background-color: $white-hover;
   }
   &.primary {
-    color: white;
     background-color: $primary-color;
+    color: white;
   }
   &.secondary {
     color: white;
