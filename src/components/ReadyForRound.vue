@@ -17,7 +17,7 @@ defineProps({
   <round-header :round-number="roundNumber"></round-header>
   <h1>Manche {{ roundNumber }}</h1>
   <h2 class="rules">{{ rules[roundNumber] }}</h2>
-  <RouterLink class="action" :to="'/manche-' + roundNumber"
+  <RouterLink class="action primary" :to="'/manche-' + roundNumber"
     >L'équipe {{ storageInterface.nextTeamToPlay }} commence !</RouterLink
   >
 </template>

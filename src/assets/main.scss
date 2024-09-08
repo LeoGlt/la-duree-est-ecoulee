@@ -7,7 +7,8 @@ $secondary-color: #024333;
 $error-color: #ff1f1f;
 $background-color: #fbd7c8;
 $primary-light: rgba(238, 97, 35, 0.4);
-$grey: grey;
+$grey: #2a2a2a;
+
 button,
 .action {
   font-weight: 600;
@@ -24,7 +25,6 @@ button,
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.24);
-  width: 250px;
   margin: 5px;
   padding: 15px;
   border-radius: 10px;
@@ -32,8 +32,14 @@ button,
   &:disabled {
     opacity: 0.5;
   }
-  &:hover {
-    background-color: $white-hover;
+
+  &.rounded {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &.primary {
     background-color: $primary-color;
@@ -48,7 +54,16 @@ button,
 h1 {
   color: #ee6123;
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  margin: 10px 2em;
+}
 body {
   background-color: $background-color;
   display: flex;
@@ -64,8 +79,64 @@ body {
   align-items: center;
   //justify-content: center;
   font-family: Inter, sans-serif;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 50px;
+  margin-top: 25px;
   max-width: 1000px;
   width: 100%;
+}
+
+label {
+  background-color: $secondary-color;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+
+  input[type='checkbox'] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    background-color: white;
+    font: inherit;
+    color: currentColor;
+    width: 30px;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+  }
+
+  input[type='checkbox']::before {
+    content: '';
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em $secondary-color;
+    background-color: CanvasText;
+  }
+
+  input[type='checkbox']:checked::before {
+    transform: scale(1);
+  }
+
+  input[type='checkbox']:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+  }
+}
+img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
 }

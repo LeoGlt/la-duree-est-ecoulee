@@ -65,8 +65,6 @@ const scoreTotal = computed(() => props.score.reduce((acc, val) => acc + val, 0)
   align-items: center;
   gap: 0.5rem;
   border-radius: 9px;
-  //background: $primary-light;
-  //width: 57px;
   height: 53px;
   flex-shrink: 0;
 }
