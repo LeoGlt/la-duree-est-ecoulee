@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import CardProposalView from '@/views/CardProposalView.vue'
+import DeckCreationView from '@/views/DeckCreationView.vue'
 import ReadyForRound1View from '@/views/ReadyForRound1View.vue'
 import Round1View from '@/views/Round1View.vue'
 import Round1RecapView from '@/views/Round1RecapView.vue'
@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: '/propose-tes-cartes',
       name: 'propose-tes-cartes',
-      component: CardProposalView
+      component: DeckCreationView
     },
     {
       path: '/cest-parti-pour-la-manche-1',

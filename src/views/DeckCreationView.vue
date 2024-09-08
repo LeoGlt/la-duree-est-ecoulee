@@ -17,6 +17,7 @@ const fillDeckWithRandomCards = () => {
 </script>
 
 <template>
+  <h1>La durée est écoulée</h1>
   <h2>{{ customCards.length }}/{{ storageInterface.deckSize }} mots</h2>
   <template v-if="customCards.length < storageInterface.deckSize">
     <input type="text" v-model="currentSuggestion" />
