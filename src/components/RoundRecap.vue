@@ -36,7 +36,8 @@ console.log('coucou')
 
 const team1Score = [...Array(props.roundNumber).keys()].map((i) => getNumberCardsFound(i + 1, 1))
 const team2Score = [...Array(props.roundNumber).keys()].map((i) => getNumberCardsFound(i + 1, 2))
-const totalScore = team1Score.reduce((acc, val) => acc + val, 0) + team2Score.reduce((acc, val) => acc + val, 0)
+const totalScore =
+  team1Score.reduce((acc, val) => acc + val, 0) + team2Score.reduce((acc, val) => acc + val, 0)
 </script>
 
 <template>
@@ -59,19 +60,18 @@ const totalScore = team1Score.reduce((acc, val) => acc + val, 0) + team2Score.re
   </template>
 </template>
 
-<style scoped  lang="scss">
+<style scoped lang="scss">
 @import '@/assets/main';
-  .score-bar-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-  }
-  h2 {
-    text-align: center;
-    color: $secondary-color;
-    margin: 0;
-  }
-
+.score-bar-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+h2 {
+  text-align: center;
+  color: $secondary-color;
+  margin: 0;
+}
 </style>

@@ -9,13 +9,20 @@ const props = defineProps({
 const scoreTotal = computed(() => props.score.reduce((acc, val) => acc + val, 0))
 </script>
 
-
 <template>
   <div class="score-bar-container">
-    <div :style="{width : (scoreTotal/$props.total)*100 + '%'}" class="score-bar" :class="{ primary: color === 'primary' }">
-      <div class="score-bar-text">{{scoreTotal}} <span class="score-bar-point"> points </span></div>
+    <div
+      :style="{ width: (scoreTotal / $props.total) * 100 + '%' }"
+      class="score-bar"
+      :class="{ primary: color === 'primary' }"
+    >
+      <div class="score-bar-text">
+        {{ scoreTotal }} <span class="score-bar-point"> points </span>
+      </div>
     </div>
-    <span class="score-bar-details" v-if="$props.score.length > 1">({{$props.score.join(' + ')}})</span>
+    <span class="score-bar-details" v-if="$props.score.length > 1"
+      >({{ $props.score.join(' + ') }})</span
+    >
   </div>
 </template>
 
@@ -23,14 +30,13 @@ const scoreTotal = computed(() => props.score.reduce((acc, val) => acc + val, 0)
 @import '@/assets/main';
 
 .score-bar-container {
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
   margin: 1rem;
-
 }
 .score-bar {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
@@ -64,5 +70,4 @@ width: 100%;
   height: 53px;
   flex-shrink: 0;
 }
-
 </style>
