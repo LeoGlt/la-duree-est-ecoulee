@@ -2,8 +2,11 @@
 import storageInterface from '@/storage-interface'
 import { getRandomDeck, initGame } from '@/components/game'
 import { ref } from 'vue'
+import { addWordsToDB } from '@/components/firestore'
 const customCards = ref([])
+const randomCards = ref([])
 const currentSuggestion = ref('')
+const dataSharingConsent = ref(true)
 
 const addCustomCard = () => {
   customCards.value.push(currentSuggestion.value)
@@ -11,23 +14,33 @@ const addCustomCard = () => {
 }
 const fillDeckWithRandomCards = () => {
   const nbRemainingCards = storageInterface.deckSize - customCards.value.length
-  const randomCards = getRandomDeck(nbRemainingCards)
-  customCards.value = [...customCards.value, ...randomCards]
+  randomCards.value = getRandomDeck(nbRemainingCards)
+}
+
+const saveCustomCardAndInitGame = () => {
+  initGame([...customCards.value, ...randomCards.value])
+  if (dataSharingConsent.value) {
+    addWordsToDB(customCards.value)
+  }
 }
 </script>
 
 <template>
   <h1>La durée est écoulée</h1>
-  <h2>{{ customCards.length }}/{{ storageInterface.deckSize }} mots</h2>
-  <template v-if="customCards.length < storageInterface.deckSize">
+  <h2>{{ customCards.length + randomCards.length }}/{{ storageInterface.deckSize }} mots</h2>
+  <template v-if="customCards.length + randomCards.length < storageInterface.deckSize">
     <input type="text" v-model="currentSuggestion" />
     <button @click="addCustomCard" :disabled="currentSuggestion === ''">Ajouter</button>
     <button @click="customCards.pop()" :disabled="customCards.length === 0">↩</button>
     <button class="secondary" @click="fillDeckWithRandomCards">Compléter le reste</button>
+    <label for="allow-data-share">
+      Je transmets mes idées aux créateurs de la durée est écoulée pour qu'ils enrichissent le jeu
+    </label>
+    <input type="checkbox" v-model="dataSharingConsent" name="allow-data-share" />
   </template>
   <template v-else>
     <button @click="customCards.pop()">↩</button>
-    <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="initGame(customCards)">
+    <RouterLink class="action" to="/cest-parti-pour-la-manche-1" @click="saveCustomCardAndInitGame">
       Démarrer la partie
     </RouterLink>
   </template>
