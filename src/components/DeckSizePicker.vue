@@ -22,5 +22,6 @@ select {
   font-size: 2rem;
   text-align: center;
   min-width: 30%;
+  max-width: 90%;
 }
 </style>
