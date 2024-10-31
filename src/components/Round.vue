@@ -99,26 +99,22 @@ const startClock = () => {
   currentCard.value = cards[0]
 }
 
-const gong = useTemplateRef("gong")
+const gong = useTemplateRef('gong')
 console.log(gong.value)
 const timeIsUp = () => {
-  gong.value.currentTime= 0
-  gong.value.play();
+  gong.value.currentTime = 0
+  gong.value.play()
   cardsShown.push({ name: cards.shift(), found: false })
   timeIsRunning.value = false
   isPlaying.value = false
 }
-
 </script>
 
 <template>
   <round-header :roundNumber="props.roundNumber"></round-header>
-  <audio
-      hidden="true"
-      ref="gong"
-    >
-    <source  src="@/assets/gong.mp3" type="audio/mpeg">
-    </audio>
+  <audio hidden="true" ref="gong">
+    <source src="@/assets/gong.mp3" type="audio/mpeg" />
+  </audio>
   <template v-if="isPlaying">
     <round-clock :time-is-running="timeIsRunning" @on-time-is-up="timeIsUp" />
     <p class="team">Equipe {{ currentTeam }}</p>
