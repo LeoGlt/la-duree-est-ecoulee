@@ -5,7 +5,7 @@ import RoundScores from './RoundScores.vue'
 import RoundModif from './RoundModif.vue'
 
 import { countCardsFound } from '@/components/cardsShown'
-import { reactive, ref } from 'vue'
+import { reactive, ref, useTemplateRef } from 'vue'
 import { getDeck, shuffle } from './game'
 import storageInterface from '@/storage-interface'
 import RoundHeader from '@/components/RoundHeader.vue'
@@ -99,7 +99,11 @@ const startClock = () => {
   currentCard.value = cards[0]
 }
 
+const gong = useTemplateRef('gong')
+console.log(gong.value)
 const timeIsUp = () => {
+  gong.value.currentTime = 0
+  gong.value.play()
   cardsShown.push({ name: cards.shift(), found: false })
   timeIsRunning.value = false
   isPlaying.value = false
@@ -108,6 +112,9 @@ const timeIsUp = () => {
 
 <template>
   <round-header :roundNumber="props.roundNumber"></round-header>
+  <audio hidden="true" ref="gong">
+    <source src="@/assets/gong.mp3" type="audio/mpeg" />
+  </audio>
   <template v-if="isPlaying">
     <round-clock :time-is-running="timeIsRunning" @on-time-is-up="timeIsUp" />
     <p class="team">Equipe {{ currentTeam }}</p>
